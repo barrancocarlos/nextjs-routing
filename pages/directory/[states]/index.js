@@ -1,14 +1,13 @@
 import Head from "next/head";
-import React from 'react';
+import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Cities  from '../../data.json'
+import Cities from "../../data.json";
 
 export default function State() {
-  const router = useRouter();
-  const { state } = router.query;
-  
- 
+  const { asPath } = useRouter();
+  const currentState = asPath.split("/").pop();
+  console.log(currentState);
 
   return (
     <div>
@@ -28,7 +27,7 @@ export default function State() {
         <section className="py-5 text-center container">
           <div className="row py-lg-5">
             <div className="col-lg-6 col-md-8 mx-auto">
-              <h1 className="fw-light">{ state }</h1>
+              <h1 className="fw-light">{currentState}</h1>
               <p className="lead text-muted">
                 Something short and leading about the collection below—its
                 contents, the creator, etc. Make it short and sweet, but not too
@@ -41,40 +40,37 @@ export default function State() {
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {Cities.map((city) => {
-              return (
-                <div className="col" key={city.id}>
-                  <div className="card shadow-sm">
-                    <div className="card-body">
-                      <h2>{city.city}</h2>
-                      <p className="card-text">{city.service}</p>
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div className="btn-group">
-                          <Link
-                            href={`/directory/${encodeURIComponent(
-                              city.stateslug
-                            )}/${encodeURIComponent(
-                              city.cityslug
-                            )}`}
-                          >
-                            <button
-                              type="button"
-                              className="btn btn-sm btn-outline-secondary"
+              if (city.stateslug === currentState) {
+                return (
+                  <div className="col" key={city.id}>
+                    <div className="card shadow-sm">
+                      <div className="card-body">
+                        <h2>{city.city}</h2>
+                        <p className="card-text">{city.service}</p>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div className="btn-group">
+                            <Link
+                              href={`/directory/${encodeURIComponent(
+                                city.stateslug
+                              )}/${encodeURIComponent(city.cityslug)}`}
                             >
-                              View City
-                            </button>
-                          </Link>
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-outline-secondary"
+                              >
+                                View City
+                              </button>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
+                );
+              }
             })}
           </div>
         </div>
-
-
-
       </main>
     </div>
   );
