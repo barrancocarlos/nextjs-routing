@@ -43,9 +43,14 @@ export default function Directory() {
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="btn-group">
                           <Link
-                            href={`/directory/${encodeURIComponent(
-                              city.stateslug
-                            )}`}
+                          // href={{
+                          //   pathname: "/directory/[stateslug]",
+                          //   query: { stateslug: city.stateslug },
+                          // }} 
+                          href={`/directory/${encodeURIComponent(
+                            city.stateslug
+                          )}`}                          
+                            
                           >
                             <button
                               type="button"
@@ -67,3 +72,5 @@ export default function Directory() {
     </div>
   );
 }
+
+

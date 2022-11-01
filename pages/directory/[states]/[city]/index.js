@@ -39,3 +39,18 @@ export default function State() {
     </div>
   );
 }
+
+// export const getStaticPaths = async () => {
+//   return {
+//     paths: Cities.map((city) => `/directory/${encodeURIComponent(city.stateslug)}`),
+//     fallback: false,
+//   };
+// };
+
+// export const getStaticProps = async ({
+//   params: { slug },
+// }) => {  
+//   const city = Cities.find((city) => `/directory/${encodeURIComponent(city.stateslug)}` === slug);
+
+//   return { props: city };
+// };
